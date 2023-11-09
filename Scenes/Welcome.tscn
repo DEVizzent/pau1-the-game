@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://oahyieitux5y"]
+
+[ext_resource type="Script" path="res://Scripts/Welcome.gd" id="1_6s0f7"]
+
+[node name="Welcome" type="Node2D"]
+script = ExtResource("1_6s0f7")
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 967.0
+offset_top = 611.0
+offset_right = 1013.0
+offset_bottom = 642.0
+text = "Start"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

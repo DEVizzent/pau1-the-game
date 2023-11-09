@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=3 uid="uid://4bwjss41sy1o"]
+
+[ext_resource type="PackedScene" uid="uid://banmwb14ttog6" path="res://Scenes/Levels/Level1TileMap.tscn" id="1_63drv"]
+[ext_resource type="PackedScene" uid="uid://blqqairjm85k1" path="res://Scenes/GUI.tscn" id="1_wal1y"]
+[ext_resource type="Script" path="res://Scenes/Levels/Level.gd" id="1_xqau0"]
+[ext_resource type="PackedScene" uid="uid://b8ttewxdns67q" path="res://Scenes/PlayerPau.tscn" id="2_20j55"]
+[ext_resource type="AudioStream" uid="uid://c7ahbgjpujmae" path="res://Sound/Song/Level1.wav" id="4_b8b8j"]
+[ext_resource type="AudioStream" uid="uid://bitbmu7jqyqw3" path="res://Sound/Effect/Farts/Fart_1.wav" id="5_6boln"]
+[ext_resource type="PackedScene" uid="uid://boaimtgm8sbgj" path="res://Scenes/settings.tscn" id="6_jssge"]
+[ext_resource type="PackedScene" uid="uid://enyme2x6ec81" path="res://Scenes/Elements/coin.tscn" id="7_tq4nu"]
+[ext_resource type="Texture2D" uid="uid://dd11aew0j58sr" path="res://Assets/Collectables/CoinRed.png" id="10_nb0fd"]
+[ext_resource type="Texture2D" uid="uid://vh8jx3hs1y51" path="res://Assets/Collectables/CoinYellow.png" id="11_jaf4f"]
+[ext_resource type="PackedScene" uid="uid://da7obft7ajhcl" path="res://Scenes/Enemies/Mummy.tscn" id="12_6ptj3"]
+[ext_resource type="PackedScene" uid="uid://btw8qwlw60r8b" path="res://Scenes/Enemies/MummySkeleton.tscn" id="12_a5y4t"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_xqau0")
+
+[node name="GUI" parent="." instance=ExtResource("1_wal1y")]
+
+[node name="Stage" parent="." instance=ExtResource("1_63drv")]
+
+[node name="PlayerPau" parent="." instance=ExtResource("2_20j55")]
+position = Vector2(249, 0)
+
+[node name="Camera2D" type="Camera2D" parent="PlayerPau"]
+offset = Vector2(0, -200)
+zoom = Vector2(0.5, 0.5)
+limit_left = 0
+limit_top = -1250
+limit_bottom = 1300
+
+[node name="MusicAudioPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_b8b8j")
+autoplay = true
+bus = &"Music"
+
+[node name="EffectAudioPlayer" type="AudioStreamPlayer" parent="." groups=["sound_effects"]]
+stream = ExtResource("5_6boln")
+bus = &"Effect"
+
+[node name="Settings" parent="." instance=ExtResource("6_jssge")]
+process_mode = 3
+visible = false
+
+[node name="Coin" parent="." instance=ExtResource("7_tq4nu")]
+position = Vector2(4070, 249)
+collectableName = "GreenCoin"
+
+[node name="Coin2" parent="." instance=ExtResource("7_tq4nu")]
+position = Vector2(6787.58, -1217.73)
+texture = ExtResource("10_nb0fd")
+collectableName = "GreenCoin"
+
+[node name="Coin3" parent="." instance=ExtResource("7_tq4nu")]
+position = Vector2(14985, -183)
+texture = ExtResource("11_jaf4f")
+collectableName = "GreenCoin"
+
+[node name="MummySkeleton" parent="." instance=ExtResource("12_a5y4t")]
+position = Vector2(6905.51, 631.844)
+
+[node name="Mummy" parent="." instance=ExtResource("12_6ptj3")]
+position = Vector2(5768.49, 603.56)
+
+[node name="MummySkeleton2" parent="." instance=ExtResource("12_a5y4t")]
+position = Vector2(2679.84, 569.619)

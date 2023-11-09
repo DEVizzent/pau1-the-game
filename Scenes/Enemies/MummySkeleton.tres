@@ -1,0 +1,35 @@
+[gd_resource type="SkeletonModificationStack2D" load_steps=6 format=3 uid="uid://fsnyqcpy5yty"]
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_r3jq6"]
+bone_index = 1
+bone2d_node = NodePath("TorsoBone/HeadBone")
+target_nodepath = NodePath("Targets/HeadTarget")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_cv1vr"]
+bone_index = 2
+bone2d_node = NodePath("TorsoBone/LeftArmBone")
+target_nodepath = NodePath("Targets/LeftArmTarget")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_eumsd"]
+bone_index = 3
+bone2d_node = NodePath("TorsoBone/RightArmBone")
+target_nodepath = NodePath("Targets/RightArmTarget")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_hx8e6"]
+bone_index = 4
+bone2d_node = NodePath("TorsoBone/LeftLegBone")
+target_nodepath = NodePath("Targets/LeftLegTarget")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_15yjp"]
+bone_index = 5
+bone2d_node = NodePath("TorsoBone/RightLegBone")
+target_nodepath = NodePath("Targets/RightLegTarget")
+
+[resource]
+enabled = true
+modification_count = 5
+modifications/0 = SubResource("SkeletonModification2DLookAt_r3jq6")
+modifications/1 = SubResource("SkeletonModification2DLookAt_cv1vr")
+modifications/2 = SubResource("SkeletonModification2DLookAt_eumsd")
+modifications/3 = SubResource("SkeletonModification2DLookAt_hx8e6")
+modifications/4 = SubResource("SkeletonModification2DLookAt_15yjp")

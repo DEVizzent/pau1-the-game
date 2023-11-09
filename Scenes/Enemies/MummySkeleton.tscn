@@ -1,0 +1,355 @@
+[gd_scene load_steps=19 format=3 uid="uid://btw8qwlw60r8b"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/Mummy.gd" id="1_wj6fw"]
+[ext_resource type="SkeletonModificationStack2D" uid="uid://fsnyqcpy5yty" path="res://Scenes/Enemies/MummySkeleton.tres" id="2_gwaq5"]
+[ext_resource type="Texture2D" uid="uid://cwtldrc6hny15" path="res://Assets/Enemies/Mommy/LeftArm.png" id="2_q667s"]
+[ext_resource type="Texture2D" uid="uid://dhbvsjrmpanli" path="res://Assets/Enemies/Mommy/LeftLeg.png" id="3_4d5y1"]
+[ext_resource type="Texture2D" uid="uid://cechw3s1c3wbo" path="res://Assets/Enemies/Mommy/RightArm.png" id="3_fplnh"]
+[ext_resource type="Texture2D" uid="uid://da3e6poxhf5do" path="res://Assets/Enemies/Mommy/RightLeg.png" id="5_fxl5j"]
+[ext_resource type="Texture2D" uid="uid://btf1etr8qmt2r" path="res://Assets/Enemies/Mommy/Torso.png" id="6_0mcly"]
+[ext_resource type="Texture2D" uid="uid://fnmnl5lg1uf7" path="res://Assets/Enemies/Mommy/Head.png" id="7_sc110"]
+[ext_resource type="Script" path="res://Scripts/Components/DamageByTouchComponent.gd" id="8_jav07"]
+[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="9_2f40u"]
+[ext_resource type="AudioStream" uid="uid://bgdah06c44arq" path="res://Sound/Effect/Mummy.ogg" id="10_xxql4"]
+[ext_resource type="AudioStream" uid="uid://gmroybi8omaa" path="res://Sound/Effect/MummyDeath.ogg" id="11_e1trj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shigp"]
+size = Vector2(338, 378)
+
+[sub_resource type="Animation" id="Animation_82vib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Targets/RightLegTarget:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(28, 208)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:SPEED")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [300.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D/Targets/LeftLegTarget:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-43, 235)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton2D/Targets/LeftArmTarget:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-221, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/Targets/RightArmTarget:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(172, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nu6k6"]
+resource_name = "deathTop"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6aykr"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Targets/RightLegTarget:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(28, 208)]
+}
+
+[sub_resource type="Animation" id="Animation_5asd6"]
+resource_name = "walking"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:SPEED")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [300.0, 0.0, 600.0, 510.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Targets/RightLegTarget:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(28, 208), Vector2(242, 98), Vector2(28, 208)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D/Targets/LeftLegTarget:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-43, 235), Vector2(-158, 199), Vector2(-43, 235)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton2D/Targets/LeftArmTarget:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-221, 1), Vector2(-211, -42), Vector2(-220, 70), Vector2(-221, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/Targets/RightArmTarget:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(172, 1), Vector2(173, -27), Vector2(174, 28), Vector2(172, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j81fs"]
+_data = {
+"RESET": SubResource("Animation_82vib"),
+"deathTop": SubResource("Animation_nu6k6"),
+"idle": SubResource("Animation_6aykr"),
+"walking": SubResource("Animation_5asd6")
+}
+
+[node name="MummySkeleton" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_wj6fw")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+modification_stack = ExtResource("2_gwaq5")
+
+[node name="LeftArmSprite" type="Sprite2D" parent="Skeleton2D"]
+position = Vector2(-108.879, 14.6765)
+rotation = 0.103673
+texture = ExtResource("2_q667s")
+
+[node name="RightArmSprite" type="Sprite2D" parent="Skeleton2D"]
+position = Vector2(91.0607, 3.93111)
+rotation = -0.169637
+texture = ExtResource("3_fplnh")
+
+[node name="LeftLegSprite" type="Sprite2D" parent="Skeleton2D"]
+position = Vector2(-11, 133)
+rotation = 0.00447786
+texture = ExtResource("3_4d5y1")
+
+[node name="RightLegSprite" type="Sprite2D" parent="Skeleton2D"]
+position = Vector2(45.5013, 128.937)
+rotation = 1.34615
+texture = ExtResource("5_fxl5j")
+
+[node name="TorsoBone" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(-2, 72)
+rest = Transform2D(1, 0, 0, 1, -2, 72)
+
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(-5, -61)
+texture = ExtResource("6_0mcly")
+
+[node name="HeadBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(0, -138)
+rest = Transform2D(1, 0, 0, 1, 0, -138)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="RemoteHead" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+position = Vector2(-35, -51)
+remote_path = NodePath("../../../HeadSprite")
+
+[node name="LeftArmBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(-46, -53)
+rest = Transform2D(1, 0, 0, 1, -46, -53)
+auto_calculate_length_and_angle = false
+length = 130.0
+bone_angle = 180.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/LeftArmBone"]
+position = Vector2(-61, 2)
+remote_path = NodePath("../../../LeftArmSprite")
+
+[node name="RightArmBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(32, -71)
+rest = Transform2D(1, 0, 0, 1, 32, -71)
+auto_calculate_length_and_angle = false
+length = 130.0
+bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="RemoteRightArm" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/RightArmBone"]
+position = Vector2(61.0607, 2.93111)
+rotation = -0.169637
+remote_path = NodePath("../../../RightArmSprite")
+
+[node name="LeftLegBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(-40, 8)
+rest = Transform2D(1, 0, 0, 1, -40, 8)
+auto_calculate_length_and_angle = false
+length = 100.0
+bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="RemoteLeftLeg" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/LeftLegBone"]
+position = Vector2(52.7989, -31.3413)
+rotation = -1.57277
+remote_path = NodePath("../../../LeftLegSprite")
+
+[node name="RightLegBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(35, 7)
+rest = Transform2D(1, 0, 0, 1, 35, 7)
+auto_calculate_length_and_angle = false
+length = 130.0
+bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/RightLegBone"]
+position = Vector2(49.4155, -14.426)
+rotation = -0.263387
+remote_path = NodePath("../../../RightLegSprite")
+
+[node name="HeadSprite" type="Sprite2D" parent="Skeleton2D"]
+position = Vector2(-40.7918, -114.179)
+rotation = -0.0764275
+texture = ExtResource("7_sc110")
+
+[node name="Targets" type="Node2D" parent="Skeleton2D"]
+
+[node name="HeadTarget" type="Node2D" parent="Skeleton2D/Targets"]
+position = Vector2(220, -83)
+
+[node name="LeftArmTarget" type="Node2D" parent="Skeleton2D/Targets"]
+position = Vector2(-221, 1)
+
+[node name="RightArmTarget" type="Node2D" parent="Skeleton2D/Targets"]
+position = Vector2(172, 1)
+
+[node name="LeftLegTarget" type="Node2D" parent="Skeleton2D/Targets"]
+position = Vector2(-43, 235)
+
+[node name="RightLegTarget" type="Node2D" parent="Skeleton2D/Targets"]
+position = Vector2(28, 208)
+
+[node name="DamageByTouchComponent" type="Area2D" parent="."]
+visible = false
+position = Vector2(-23, 2)
+collision_layer = 0
+script = ExtResource("8_jav07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageByTouchComponent"]
+visible = false
+position = Vector2(15, -6)
+shape = SubResource("RectangleShape2D_shigp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-8, -4)
+shape = SubResource("RectangleShape2D_shigp")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("9_2f40u")
+healt = 1
+allowedDamageTypes = Array[int]([1])
+
+[node name="FlipSound" type="AudioStreamPlayer2D" parent="."]
+visible = false
+position = Vector2(-23, 2)
+stream = ExtResource("10_xxql4")
+bus = &"Effect"
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+visible = false
+position = Vector2(-23, 2)
+stream = ExtResource("11_e1trj")
+bus = &"Effect"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j81fs")
+}

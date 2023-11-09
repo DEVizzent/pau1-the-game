@@ -1,0 +1,163 @@
+[gd_scene load_steps=18 format=3 uid="uid://b8ttewxdns67q"]
+
+[ext_resource type="Script" path="res://Scripts/Player/PlayerPau.gd" id="1_tiqfd"]
+[ext_resource type="Texture2D" uid="uid://5vxf71asp4kf" path="res://Assets/Pau/PauAgachado.png" id="2_2y2ju"]
+[ext_resource type="Texture2D" uid="uid://2ht258d25vie" path="res://Assets/Pau/Pau.png" id="2_i5j07"]
+[ext_resource type="Script" path="res://Scripts/Player/AttackFoot.gd" id="4_imf26"]
+[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="5_sey0r"]
+[ext_resource type="AudioStream" uid="uid://bhx0bf8mawtin" path="res://Sound/Effect/Salto.ogg" id="6_3rv2w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrdnx"]
+size = Vector2(130, 282)
+
+[sub_resource type="Animation" id="Animation_qxuy0"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_i5j07")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_oj7q2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2y2ju")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_1w33s"]
+resource_name = "agachado"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2y2ju")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 0.5), Vector2(1, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jd0yy"]
+_data = {
+"Idle": SubResource("Animation_qxuy0"),
+"RESET": SubResource("Animation_oj7q2"),
+"agachado": SubResource("Animation_1w33s")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kg2yt"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rrul3"]
+animation = &"agachado"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vgtms"]
+advance_mode = 2
+advance_condition = &"agachado"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ujtpv"]
+advance_mode = 2
+advance_condition = &"not_agachado"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jee6a"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ooodh"]
+states/Idle/node = SubResource("AnimationNodeAnimation_kg2yt")
+states/Idle/position = Vector2(309.377, 85)
+states/agachado/node = SubResource("AnimationNodeAnimation_rrul3")
+states/agachado/position = Vector2(592.377, 45)
+transitions = ["Idle", "agachado", SubResource("AnimationNodeStateMachineTransition_vgtms"), "agachado", "Idle", SubResource("AnimationNodeStateMachineTransition_ujtpv"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jee6a")]
+graph_offset = Vector2(-412.623, 0)
+
+[node name="PlayerPau" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 13
+script = ExtResource("1_tiqfd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 44)
+scale = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_jrdnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2y2ju")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jd0yy")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ooodh")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/conditions/agachado = false
+parameters/conditions/not_agachado = false
+
+[node name="AttackFoot" type="RayCast2D" parent="."]
+position = Vector2(0, 100)
+target_position = Vector2(0, 105)
+collision_mask = 2
+script = ExtResource("4_imf26")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("5_sey0r")
+healt = 10
+allowedDamageTypes = Array[int]([0])
+
+[node name="Salto" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_3rv2w")
+bus = &"Effect"

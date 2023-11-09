@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://enyme2x6ec81"]
+
+[ext_resource type="Texture2D" uid="uid://c4sc3tvlf8ijr" path="res://Assets/Collectables/CoinGreen.png" id="1_wyj2e"]
+[ext_resource type="Script" path="res://Scripts/Collectable.gd" id="2_uk1qi"]
+[ext_resource type="AudioStream" uid="uid://c8n37alkvewvj" path="res://Sound/Effect/Coin.ogg" id="3_j32nj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_27yop"]
+radius = 95.0
+
+[node name="Coin" type="Sprite2D"]
+texture = ExtResource("1_wyj2e")
+script = ExtResource("2_uk1qi")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_27yop")
+
+[node name="SoundGotIt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_j32nj")
+bus = &"Effect"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
