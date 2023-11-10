@@ -26,6 +26,7 @@ bone2d_node = NodePath("TorsoBone/RightLegBone")
 target_nodepath = NodePath("Targets/RightLegTarget")
 
 [resource]
+resource_local_to_scene = true
 enabled = true
 modification_count = 5
 modifications/0 = SubResource("SkeletonModification2DLookAt_r3jq6")

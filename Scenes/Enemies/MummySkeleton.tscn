@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://btw8qwlw60r8b"]
+[gd_scene load_steps=24 format=3 uid="uid://btw8qwlw60r8b"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Mummy.gd" id="1_wj6fw"]
-[ext_resource type="SkeletonModificationStack2D" uid="uid://fsnyqcpy5yty" path="res://Scenes/Enemies/MummySkeleton.tres" id="2_gwaq5"]
 [ext_resource type="Texture2D" uid="uid://cwtldrc6hny15" path="res://Assets/Enemies/Mommy/LeftArm.png" id="2_q667s"]
 [ext_resource type="Texture2D" uid="uid://dhbvsjrmpanli" path="res://Assets/Enemies/Mommy/LeftLeg.png" id="3_4d5y1"]
 [ext_resource type="Texture2D" uid="uid://cechw3s1c3wbo" path="res://Assets/Enemies/Mommy/RightArm.png" id="3_fplnh"]
@@ -12,6 +11,46 @@
 [ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="9_2f40u"]
 [ext_resource type="AudioStream" uid="uid://bgdah06c44arq" path="res://Sound/Effect/Mummy.ogg" id="10_xxql4"]
 [ext_resource type="AudioStream" uid="uid://gmroybi8omaa" path="res://Sound/Effect/MummyDeath.ogg" id="11_e1trj"]
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_5d710"]
+resource_local_to_scene = true
+bone_index = 1
+bone2d_node = NodePath("TorsoBone/HeadBone")
+target_nodepath = NodePath("Targets/HeadTarget")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_i6bfw"]
+resource_local_to_scene = true
+bone_index = 2
+bone2d_node = NodePath("TorsoBone/LeftArmBone")
+target_nodepath = NodePath("Targets/LeftArmTarget")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_l1iga"]
+resource_local_to_scene = true
+bone_index = 3
+bone2d_node = NodePath("TorsoBone/RightArmBone")
+target_nodepath = NodePath("Targets/RightArmTarget")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_jnoym"]
+resource_local_to_scene = true
+bone_index = 4
+bone2d_node = NodePath("TorsoBone/LeftLegBone")
+target_nodepath = NodePath("Targets/LeftLegTarget")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_evwey"]
+resource_local_to_scene = true
+bone_index = 5
+bone2d_node = NodePath("TorsoBone/RightLegBone")
+target_nodepath = NodePath("Targets/RightLegTarget")
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_alhnf"]
+resource_local_to_scene = true
+enabled = true
+modification_count = 5
+modifications/0 = SubResource("SkeletonModification2DLookAt_5d710")
+modifications/1 = SubResource("SkeletonModification2DLookAt_i6bfw")
+modifications/2 = SubResource("SkeletonModification2DLookAt_l1iga")
+modifications/3 = SubResource("SkeletonModification2DLookAt_jnoym")
+modifications/4 = SubResource("SkeletonModification2DLookAt_evwey")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shigp"]
 size = Vector2(338, 378)
@@ -201,7 +240,7 @@ collision_mask = 9
 script = ExtResource("1_wj6fw")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
-modification_stack = ExtResource("2_gwaq5")
+modification_stack = SubResource("SkeletonModificationStack2D_alhnf")
 
 [node name="LeftArmSprite" type="Sprite2D" parent="Skeleton2D"]
 position = Vector2(-108.879, 14.6765)
