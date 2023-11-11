@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://blqqairjm85k1"]
+[gd_scene load_steps=4 format=3 uid="uid://blqqairjm85k1"]
 
 [ext_resource type="Script" path="res://Scenes/CollectableList.gd" id="1_fj0et"]
+[ext_resource type="Script" path="res://Scripts/UI/Hearts.gd" id="1_kxjgw"]
+[ext_resource type="Texture2D" uid="uid://dnvv3hvn8xk2i" path="res://Assets/UI/cors.png" id="2_1sj5v"]
 
 [node name="GUI" type="CanvasLayer"]
 
-[node name="Lives" type="HBoxContainer" parent="."]
+[node name="Hearts" type="HBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_kxjgw")
+heartTexture = ExtResource("2_1sj5v")
 
 [node name="Collectables" type="HBoxContainer" parent="."]
 anchors_preset = 1

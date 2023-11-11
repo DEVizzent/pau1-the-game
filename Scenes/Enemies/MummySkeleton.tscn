@@ -236,7 +236,7 @@ _data = {
 
 [node name="MummySkeleton" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 8
 script = ExtResource("1_wj6fw")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
@@ -335,7 +335,7 @@ remote_path = NodePath("../../../RightLegSprite")
 
 [node name="HeadSprite" type="Sprite2D" parent="Skeleton2D"]
 position = Vector2(-40.7918, -114.179)
-rotation = -0.0764275
+rotation = -0.0764274
 texture = ExtResource("7_sc110")
 
 [node name="Targets" type="Node2D" parent="Skeleton2D"]
@@ -373,7 +373,6 @@ shape = SubResource("RectangleShape2D_shigp")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("9_2f40u")
-healt = 1
 allowedDamageTypes = Array[int]([1])
 
 [node name="FlipSound" type="AudioStreamPlayer2D" parent="."]

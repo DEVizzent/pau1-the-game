@@ -155,9 +155,12 @@ script = ExtResource("4_imf26")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("5_sey0r")
-healt = 10
+health = 5
 allowedDamageTypes = Array[int]([0])
 
 [node name="Salto" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_3rv2w")
 bus = &"Effect"
+
+[node name="TimerControl" type="Timer" parent="."]
+one_shot = true
