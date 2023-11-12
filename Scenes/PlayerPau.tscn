@@ -164,3 +164,6 @@ bus = &"Effect"
 
 [node name="TimerControl" type="Timer" parent="."]
 one_shot = true
+
+[node name="TimerJump" type="Timer" parent="."]
+one_shot = true
