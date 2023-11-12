@@ -335,7 +335,7 @@ remote_path = NodePath("../../../RightLegSprite")
 
 [node name="HeadSprite" type="Sprite2D" parent="Skeleton2D"]
 position = Vector2(-40.7918, -114.179)
-rotation = -0.0764274
+rotation = -0.0764275
 texture = ExtResource("7_sc110")
 
 [node name="Targets" type="Node2D" parent="Skeleton2D"]

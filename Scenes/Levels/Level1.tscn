@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://4bwjss41sy1o"]
+[gd_scene load_steps=13 format=3 uid="uid://4bwjss41sy1o"]
 
 [ext_resource type="PackedScene" uid="uid://banmwb14ttog6" path="res://Scenes/Levels/Level1TileMap.tscn" id="1_63drv"]
 [ext_resource type="PackedScene" uid="uid://blqqairjm85k1" path="res://Scenes/GUI.tscn" id="1_wal1y"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://boaimtgm8sbgj" path="res://Scenes/settings.tscn" id="6_jssge"]
 [ext_resource type="PackedScene" uid="uid://enyme2x6ec81" path="res://Scenes/Elements/coin.tscn" id="7_tq4nu"]
 [ext_resource type="Texture2D" uid="uid://dd11aew0j58sr" path="res://Assets/Collectables/CoinRed.png" id="10_nb0fd"]
+[ext_resource type="Texture2D" uid="uid://b00n41uusqgl1" path="res://Assets/Collectables/CoinPau.png" id="11_a817g"]
 [ext_resource type="Texture2D" uid="uid://vh8jx3hs1y51" path="res://Assets/Collectables/CoinYellow.png" id="11_jaf4f"]
 [ext_resource type="PackedScene" uid="uid://btw8qwlw60r8b" path="res://Scenes/Enemies/MummySkeleton.tscn" id="12_a5y4t"]
 
@@ -58,10 +59,10 @@ texture = ExtResource("11_jaf4f")
 collectableName = "GreenCoin"
 
 [node name="Coin4" parent="." instance=ExtResource("7_tq4nu")]
-modulate = Color(0.466667, 0.466667, 1, 1)
 position = Vector2(10663.4, -801.593)
-texture = ExtResource("10_nb0fd")
+texture = ExtResource("11_a817g")
 collectableName = "GreenCoin"
+type = 1
 
 [node name="MummySkeleton" parent="." instance=ExtResource("12_a5y4t")]
 position = Vector2(5507.71, 612.26)
