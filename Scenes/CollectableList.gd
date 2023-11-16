@@ -8,4 +8,5 @@ func _on_collected(_collectableName:String, texture:Texture2D):
 	collectableIcon.set_texture(texture)
 	collectableIcon.custom_minimum_size = Vector2(50, 50)
 	collectableIcon.expand_mode = TextureRect.EXPAND_FIT_HEIGHT
+	collectableIcon.add_to_group("collectables-ui")
 	add_child(collectableIcon)

@@ -14,6 +14,7 @@ const MAX_JUMP_DURATION_TIME = 0.3
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var timerControl:Timer = $TimerControl
 @onready var timerJump:Timer = $TimerJump
+var blockPlayerMovement:bool = false
 var lostControlByDamage:bool = false:
 	set(new_value):
 		lostControlByDamage = new_value
@@ -25,6 +26,7 @@ func _ready():
 	$AttackFoot.attack_done.connect(attackJump)
 	$HealthComponent.damaged.connect(gotDamage)
 	Events.emit_signal("updateHearts", $HealthComponent.health)
+	Events.levelCompleted.connect(_blockPlayerMovement)
 	timerControl.timeout.connect(recoverControlByDamage)
 	timerJump.wait_time = MAX_JUMP_DURATION_TIME
 
@@ -44,6 +46,9 @@ func _physics_process(delta):
 
 func playerMovement(delta:float)->void:
 	if lostControlByDamage:
+		return
+	if blockPlayerMovement:
+		velocity.x = 0
 		return
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -77,3 +82,6 @@ func gotDamage(originPositionOfDamage) -> void:
 
 func recoverControlByDamage()->void:
 	lostControlByDamage = false
+
+func _blockPlayerMovement()->void:
+	blockPlayerMovement = true

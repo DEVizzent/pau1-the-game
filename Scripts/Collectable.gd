@@ -9,6 +9,7 @@ enum Type {
 	OPTIONAL
 }
 func _ready():
+	add_to_group("collectables")
 	if type == Type.MANDATORY:
 		add_to_group('mandatoryCollectables')
 	else :
